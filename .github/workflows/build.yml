@@ -12,7 +12,7 @@ jobs:
     container: almalinux:latest
     steps:
       - uses: actions/checkout@v3
-      - run: "OHAI"
+      - run: echo "OHAI"
       - run: pwd
       - run: echo $PWD
       - run: ls -la
