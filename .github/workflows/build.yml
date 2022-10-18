@@ -9,7 +9,7 @@ on:
 jobs:
   gather_requirements:
     runs-on: ubuntu-latest
-    container: almalinux:9-minimal
+    container: almalinux:latest
     steps:
       - uses: actions/checkout@v3
       - run: "OHAI"
