@@ -12,7 +12,5 @@ jobs:
     container: almalinux:latest
     steps:
       - uses: actions/checkout@v3
-      - run: echo "OHAI"
-      - run: pwd
-      - run: echo $PWD
       - run: ls -la
+      - run: scripts/docker_xfce.sh
