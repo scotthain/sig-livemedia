@@ -7,10 +7,15 @@ on:
     branches: [$default-branch]
 
 jobs:
-  gather_requirements:
+  build_xfce:
     runs-on: ubuntu-latest
     container: almalinux:latest
     steps:
       - uses: actions/checkout@v3
-      - run: ls -la
-      - run: scripts/docker_xfce.sh
+      - run: yum install epel-release -y && yum install livecd-tools hfsplus-tools -y # This will take a minute, until i look at the build image
+      - run: livecd-creator --config flat-xfce.ks \
+               --fslabel AlmaLinux-8-LiveDVD-XFCE \
+               --title=AlmaLinux-8-LiveDVD \
+               --product="AlmaLinux Live 8.6" \
+               --cache=$PWD/pkg-cache-alma \
+               --releasever=8.6

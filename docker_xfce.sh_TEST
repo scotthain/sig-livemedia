@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -ex
+
+rm -f $PWD/kickstarts/repos.txt
+ln -s $PWD/kickstarts/repos-86.txt $PWD/kickstarts/repos.txt
+ksflatten --config $PWD/kickstarts/almalinux-8-live-xfce.ks --output flat-xfce.ks
+sed -i 's/repo --name="baseos" --base/url --/' $PWD/flat-xfce.ks &>/dev/null
+livecd-creator --config flat-xfce.ks \
+               --fslabel AlmaLinux-8-LiveDVD-XFCE \
+               --title=AlmaLinux-8-LiveDVD \
+               --product="AlmaLinux Live 8.6" \
+               --cache=$PWD/pkg-cache-alma \
+               --releasever=8.6
